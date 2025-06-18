@@ -1,5 +1,7 @@
 from parser import Parser
 
+import pytest
+
 
 def test_parser():
     byte_codes = [
@@ -16,3 +18,10 @@ def test_parser():
     for i in range(len(byte_codes)):
         parser.parse_bytes(byte_codes[i])
         assert parser.parsed_bytes == ints[i]
+
+
+def test_parser_fail():
+    parser = Parser()
+
+    with pytest.raises(ValueError) as _:
+        parser.parse_bytes(b"\xff\x05")

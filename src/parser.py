@@ -4,6 +4,9 @@ class Parser:
         self.parsed_bytes = 0
 
     def parse_bytes(self, byte_code):
+        if len(byte_code) < 4:
+            raise ValueError("Need at least 4 bytes to parse a 32-bit integer")
+
         b0 = byte_code[0]
         b1 = byte_code[1] << 8
         b2 = byte_code[2] << 16
